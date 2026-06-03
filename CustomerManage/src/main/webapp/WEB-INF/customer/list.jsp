@@ -47,6 +47,12 @@
                 </td>
 
                 <!-- TODO ｢削除｣ボタン -->
+                <td class="center">
+                	<form action="CustomerServlet" method="post">
+                		<button name="state" value="delete_confirm,<%=customer.getId()%>">削除</button>
+                	</form>
+                </td>
+                <!-- //TODO ｢削除｣ボタン  -->
 
                 <%
                     }
@@ -60,7 +66,14 @@
             <p>
 
                 <!-- TODO ｢新規登録｣ボタン -->
-
+                <%-- アクセス権限追加、一般従業員は非表示 --%>
+                <%
+                if (user.getLvl() >= 1) {
+            %>
+               <button name="state" value="new">新規登録</button>
+               <% } %>
+                <!-- //TODO ｢新規登録｣ボタン -->
+                
                 <button name="state" value="search">検索条件画面</button>
             </p>
         </form>
