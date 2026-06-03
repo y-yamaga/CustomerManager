@@ -11,7 +11,13 @@
     <div class="main">
 
         <!-- TODO ｢削除未完了｣画面 -->
-
+    <h2>新規登録完了</h2>
+    <h2><%=session.getAttribute("errMessage")%></h2>
+        <form action="CustomerServlet" method="post">
+            <p>
+                <button name="state" value="list">検索画面</button>
+            </p>
+        </form>
     </div>
 </body>
 </html>
