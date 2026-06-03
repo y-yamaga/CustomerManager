@@ -347,22 +347,22 @@ public class CustomerServlet extends BaseServlet {
     		customer.setName(strName);
     	}
     	if (strZip != null && !strZip.isEmpty()) {
-    		customer.setName(strZip);
+    		customer.setZip(strZip);
     	}
     	if (strAddress1 != null && !strAddress1.isEmpty()) {
-    		customer.setName(strAddress1);
+    		customer.setAddress1(strAddress1);
     	}
     	if (strAddress2 != null && !strAddress2.isEmpty()) {
-    		customer.setName(strAddress2);
+    		customer.setAddress2(strAddress2);
     	}
     	if (strTel != null && !strTel.isEmpty()) {
-    		customer.setName(strTel);
+    		customer.setTel(strTel);
     	}
     	if (strFax != null && !strFax.isEmpty()) {
-    		customer.setName(strFax);
+    		customer.setFax(strFax);
     	}
     	if (strEmail != null && !strEmail.isEmpty()) {
-    		customer.setName(strEmail);
+    		customer.setEmail(strEmail);
     	}
     	
     	// 変更後の顧客情報をセッションに保存
