@@ -49,12 +49,10 @@ public class UserServlet extends BaseServlet {
         
         UserBean user = (UserBean)session.getAttribute("user");
         
-        /*
         if((user == null) || (user.getName() == null)){
             procSessionError(request, response, session);
             return;
         }
-        */
 
         UserLogic userLogic = new UserLogic();
         user = userLogic.load(user.getId());
