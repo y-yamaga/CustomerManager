@@ -328,46 +328,10 @@ public class CustomerServlet extends BaseServlet {
     private void procEditConfirm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO 未実装
-    	// リクエストパラメータを取得
-    	request.setCharacterEncoding("UTF-8");
-    	String strName = request.getParameter("strName");
-    	String strZip = request.getParameter("strZip");
-    	String strAddress1 = request.getParameter("strAddress1");
-    	String strAddress2 = request.getParameter("strAddress2");
-    	String strTel = request.getParameter("strTel");
-    	String strFax = request.getParameter("strFax");
-    	String strEmail = request.getParameter("strEmail");
-    	
-    	// セッションからインスタンスを取得
-    	HttpSession session = request.getSession();
-    	CustomerBean customer = (CustomerBean)session.getAttribute("customer");
-    	
-    	// 更新箇所の値を変更（空白は変更しない）
-    	if (strName != null && !strName.isEmpty()) {
-    		customer.setName(strName);
-    	}
-    	if (strZip != null && !strZip.isEmpty()) {
-    		customer.setZip(strZip);
-    	}
-    	if (strAddress1 != null && !strAddress1.isEmpty()) {
-    		customer.setAddress1(strAddress1);
-    	}
-    	if (strAddress2 != null && !strAddress2.isEmpty()) {
-    		customer.setAddress2(strAddress2);
-    	}
-    	if (strTel != null && !strTel.isEmpty()) {
-    		customer.setTel(strTel);
-    	}
-    	if (strFax != null && !strFax.isEmpty()) {
-    		customer.setFax(strFax);
-    	}
-    	if (strEmail != null && !strEmail.isEmpty()) {
-    		customer.setEmail(strEmail);
-    	}
-    	
-    	// 変更後の顧客情報をセッションに保存
-    	session.setAttribute("customer", customer);
-    	
+    	// リクエスト内の顧客情報をセッションcustomerに保存
+    	CustomerLogic cLogic = new CustomerLogic();
+    	cLogic.setCustomerBeanFromRequestToSession(request);
+
     	// 編集確認(edit.confirm)へフォワード
         getServletContext().getRequestDispatcher("/WEB-INF/customer/edit_confirm.jsp").forward(request, response);
     }
@@ -383,27 +347,9 @@ public class CustomerServlet extends BaseServlet {
     private void procNewConfirm(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException, UnsupportedEncodingException {
         // TODO 未実装
-    	// リクエストパラメーターを取得しインスタンス生成
-    	request.setCharacterEncoding("UTF-8");
-    	String strName = request.getParameter("strName");
-    	String strZip = request.getParameter("strZip");
-    	String strAddress1 = request.getParameter("strAddress1");
-    	String strAddress2 = request.getParameter("strAddress2");
-    	String strTel = request.getParameter("strTel");
-    	String strFax = request.getParameter("strFax");
-    	String strEmail = request.getParameter("strEmail");
-    	
-    	CustomerBean customer = new CustomerBean();
-    	customer.setName(strName);
-    	customer.setZip(strZip);
-    	customer.setAddress1(strAddress1);
-    	customer.setAddress2(strAddress2);
-    	customer.setTel(strTel);
-    	customer.setFax(strFax);
-    	customer.setEmail(strEmail);
-    	
-    	// 新規顧客情報をセッションスコープに保存
-    	request.getSession().setAttribute("customer", customer);
+    	// リクエスト内の顧客情報をセッションcustomerに保存
+    	CustomerLogic cLogic = new CustomerLogic();
+    	cLogic.setCustomerBeanFromRequestToSession(request);
     	
     	// 入力確認(new_confirm.jsp)にフォワード
     	getServletContext().getRequestDispatcher("/WEB-INF/customer/new_confirm.jsp").forward(request, response);
