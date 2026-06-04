@@ -14,7 +14,7 @@
 
         <!-- TODO ｢新規登録｣画面 -->
     <h2>新規登録</h2>
-        <form name="form1" action="CustomerServlet" method="post"
+        <form name="form_edit" action="CustomerServlet" method="post"
             onsubmit="return funcConfirm()">
             <table>
                 <tr>
