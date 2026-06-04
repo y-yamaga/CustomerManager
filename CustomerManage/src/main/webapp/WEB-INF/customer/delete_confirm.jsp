@@ -55,7 +55,7 @@
         		<input type="hidden" name="strEmail" value="<%=customer.getEmail()%>">
         	</p>
         	<p>
-        		<button typy="button" name="state" value="update,<%=customer.getId()%>">OK</button>
+        		<button typy="button" name="state" value="delete">OK</button>
         		<input type="button" value="戻る" onclick="history.back()">
         	</p>
         </form>
