@@ -199,10 +199,10 @@ public class CustomerServlet extends BaseServlet {
     	// フォワード
     	if (errMsg == null) {
     		//成功 -> 更新完了(updata_success.jsp)
-    		getServletContext().getRequestDispatcher("/WEB-INF/customer/updata_success.jsp").forward(request, response);
+    		getServletContext().getRequestDispatcher("/WEB-INF/customer/update_success.jsp").forward(request, response);
     	} else {
     		//失敗 -> 更新未完了(updata_fail.jsp)
-        	getServletContext().getRequestDispatcher("/WEB-INF/customer/updata_fail.jsp").forward(request, response);
+        	getServletContext().getRequestDispatcher("/WEB-INF/customer/update_fail.jsp").forward(request, response);
     	}
     }
 
