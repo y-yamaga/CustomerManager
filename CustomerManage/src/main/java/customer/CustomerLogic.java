@@ -1,5 +1,7 @@
 package customer;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -86,15 +88,54 @@ public class CustomerLogic {
         LogUtil.println(this.getClass().getSimpleName() + "#setCustomerBeanFromRequestToSession");
 
         // TODO 未実装
-        // リクエスト内の顧客情報CustomerBeanインスタンスを取得        
-        int id = Integer.parseInt(request.getParameter("intId"));
-        CustomerBean customerBean  = load(id);
-        
-        //CustomerBean customerBean = (CustomerBean)request.getAttribute(""); 
-        
-        //セッションスコープに顧客情報Beanを保存
+        // セッションcustomerがnullでないか確認
         HttpSession session = request.getSession();
-        session.setAttribute("Bean",customerBean);
-
+        CustomerBean customer = (CustomerBean)session.getAttribute("customer");
+        if (customer == null) {
+            customer = new CustomerBean();
+        }
+        
+        // リクエストパラメーターを取得しインスタンス生成
+    	try {
+			request.setCharacterEncoding("UTF-8");
+			String strName = request.getParameter("strName");
+	    	String strZip = request.getParameter("strZip");
+	    	String strAddress1 = request.getParameter("strAddress1");
+	    	String strAddress2 = request.getParameter("strAddress2");
+	    	String strTel = request.getParameter("strTel");
+	    	String strFax = request.getParameter("strFax");
+	    	String strEmail = request.getParameter("strEmail");
+	    	
+	    	// 更新箇所の値を変更（空白は変更しない）
+	    	if (strName != null && !strName.isEmpty()) {
+	    		customer.setName(strName);
+	    	}
+	    	if (strZip != null && !strZip.isEmpty()) {
+	    		customer.setZip(strZip);
+	    	}
+	    	if (strAddress1 != null && !strAddress1.isEmpty()) {
+	    		customer.setAddress1(strAddress1);
+	    	}
+	    	if (strAddress2 != null && !strAddress2.isEmpty()) {
+	    		customer.setAddress2(strAddress2);
+	    	}
+	    	if (strTel != null && !strTel.isEmpty()) {
+	    		customer.setTel(strTel);
+	    	}
+	    	if (strFax != null && !strFax.isEmpty()) {
+	    		customer.setFax(strFax);
+	    	}
+	    	if (strEmail != null && !strEmail.isEmpty()) {
+	    		customer.setEmail(strEmail);
+	    	}
+	    	
+	    	// 変更後の顧客情報をセッションに保存
+	    	session.setAttribute("customer", customer);
+	    	
+		} catch (UnsupportedEncodingException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+    	
     }
 }
