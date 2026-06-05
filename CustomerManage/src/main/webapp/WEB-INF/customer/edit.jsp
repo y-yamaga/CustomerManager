@@ -63,6 +63,7 @@
     function funcConfirm() {
 
         // TODO バリデーションチェック･alertダイアログ処理
+        /* 空文字一旦保留
         if (document.form_edit.strName.value == "") {
                 alert("氏名が入力されていません。");
                 return false;
@@ -71,11 +72,15 @@
        	 alert("郵便番号が入力されていません。");
             return false;
            }
+        */
      	// 正規表現パターン郵便番号
-        if (!document.form_edit.strZip.value.match(/^\d{3}-\d{4}$|^\d{7}$/)) {
-            alert("郵便番号形式ではありません。ハイフンをいれてください。");
-            return false;
-        }
+     	if(document.form_edit.strZip.value != ""){
+	        if (!document.form_edit.strZip.value.match(/^\d{3}-\d{4}$/)) {
+	            alert("郵便番号形式ではありません。文字数を確認の上、ハイフンをいれてください。");
+	            return false;
+	        }
+     	}
+        /*
         if(document.form_edit.strAddress1.value == ""){
           	 alert("住所1が入力されていません。");
                return false;
@@ -88,24 +93,35 @@
         	 alert("TELが入力されていません。");
              return false;
            } 
+        */
         //正規表現パターン電話番号形式
-        const regexStrict = /^[0-9-]{10,13}$/;
-        if (!document.form_edit.strTel.value.match(regexStrict)) {
-            alert("電話番号形式ではありません。ハイフンをいれてください。");
-            return false;
-        } 
+        const regexStrict = /^(0[1-9]\d{0,3})-\d{1,4}-\d{4}$/;
+        if(document.form_edit.strTel.value != ""){
+	        if (!document.form_edit.strTel.value.match(regexStrict)) {
+	            alert("電話番号形式ではありません。ハイフンをいれてください。");
+	            return false;
+	        } 
+        }
+        /*
         if(document.form_edit.strFax.value == ""){
        	 alert("FAXが入力されていません。");
             return false;
           }
-        if (!document.form_edit.strFax.value.match(regexStrict)) {
-            alert("FAX番号形式ではありません。ハイフンをいれてください。");
-            return false;
+         */
+        if(document.form_edit.strFax.value != ""){          
+	        if (!document.form_edit.strFax.value.match(regexStrict)) {
+	            alert("FAX番号形式ではありません。ハイフンをいれてください。");
+	            return false;
+	        }
         }
+         
+         /*
         if(document.form_edit.strEmail.value == ""){
           	 alert("メールアドレスが入力されていません。");
                return false;
              }
+        */
+
         //TODO バリデーションチェック･alertダイアログ処理
 
     }
