@@ -201,6 +201,8 @@ public class CustomerServlet extends BaseServlet {
     		//成功 -> 更新完了(updata_success.jsp)
     		getServletContext().getRequestDispatcher("/WEB-INF/customer/update_success.jsp").forward(request, response);
     	} else {
+    		// errMsgをセッションスコープに保存
+    		session.setAttribute("errMessage",errMsg);
     		//失敗 -> 更新未完了(updata_fail.jsp)
         	getServletContext().getRequestDispatcher("/WEB-INF/customer/update_fail.jsp").forward(request, response);
     	}
@@ -244,6 +246,8 @@ public class CustomerServlet extends BaseServlet {
     		// 成功 -> 新規登録完了(add_success.jsp)
     		getServletContext().getRequestDispatcher("/WEB-INF/customer/add_success.jsp").forward(request, response);
     	} else {
+    		// errMsgをセッションスコープに保存
+    		session.setAttribute("errMessage",errMsg);
     		// 失敗 -> 新規登録未完了(add_fail.jsp)
     		getServletContext().getRequestDispatcher("/WEB-INF/customer/add_fail.jsp").forward(request, response);
     	}
@@ -297,6 +301,8 @@ public class CustomerServlet extends BaseServlet {
     		// 成功 -> 削除完了(delete_success.jsp)
         	getServletContext().getRequestDispatcher("/WEB-INF/customer/delete_success.jsp").forward(request, response);
     	} else {
+    		// errMsgをセッションスコープに保存
+    		session.setAttribute("errMessage",errMsg);
         	// 失敗 -> 削除未完了(delete_fail.jsp)
     		getServletContext().getRequestDispatcher("/WEB-INF/customer/delete_fail.jsp").forward(request, response);
     	}
