@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.CustomerDao;
 import util.LogUtil;
+import util.StringUtil;
 
 /**
  * 顧客情報のロジック
@@ -98,13 +99,13 @@ public class CustomerLogic {
         // リクエストパラメーターを取得しインスタンス生成
     	try {
 			request.setCharacterEncoding("UTF-8");
-			String strName = request.getParameter("strName");
-	    	String strZip = request.getParameter("strZip");
-	    	String strAddress1 = request.getParameter("strAddress1");
-	    	String strAddress2 = request.getParameter("strAddress2");
-	    	String strTel = request.getParameter("strTel");
-	    	String strFax = request.getParameter("strFax");
-	    	String strEmail = request.getParameter("strEmail");
+			String strName = StringUtil.exchangeESCEncoding(request.getParameter("strName"));
+	    	String strZip = StringUtil.exchangeESCEncoding(request.getParameter("strZip"));
+	    	String strAddress1 = StringUtil.exchangeESCEncoding(request.getParameter("strAddress1"));
+	    	String strAddress2 = StringUtil.exchangeESCEncoding(request.getParameter("strAddress2"));
+	    	String strTel = StringUtil.exchangeESCEncoding(request.getParameter("strTel"));
+	    	String strFax = StringUtil.exchangeESCEncoding(request.getParameter("strFax"));
+	    	String strEmail = StringUtil.exchangeESCEncoding(request.getParameter("strEmail"));
 	    	
 	    	// 更新箇所の値を変更（空白は変更しない）
 	    	if (strName != null && !strName.isEmpty()) {
