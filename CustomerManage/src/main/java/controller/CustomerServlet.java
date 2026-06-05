@@ -266,6 +266,10 @@ public class CustomerServlet extends BaseServlet {
     private void procDeleteConfirm(HttpServletRequest request, HttpServletResponse response, String id)
             throws ServletException, IOException {
         // TODO 未実装
+    	// キャッシュ禁止
+    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	//HTTP 1.1
+    	response.setHeader("Pragma", "no-cache");	//HTTP 1.0
+    	
     	// ID検索で顧客情報をDBから取得
     	CustomerLogic cLogic = new CustomerLogic();
     	CustomerBean customer = cLogic.load(Integer.parseInt(id));
@@ -334,6 +338,10 @@ public class CustomerServlet extends BaseServlet {
     private void procEditConfirm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO 未実装
+    	// キャッシュ禁止
+    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	//HTTP 1.1
+    	response.setHeader("Pragma", "no-cache");	//HTTP 1.0
+    	
     	// リクエスト内の顧客情報をセッションcustomerに保存
     	CustomerLogic cLogic = new CustomerLogic();
     	cLogic.setCustomerBeanFromRequestToSession(request);
@@ -353,6 +361,10 @@ public class CustomerServlet extends BaseServlet {
     private void procNewConfirm(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException, UnsupportedEncodingException {
         // TODO 未実装
+    	// キャッシュ禁止
+    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	//HTTP 1.1
+    	response.setHeader("Pragma", "no-cache");	//HTTP 1.0
+    	
     	// リクエスト内の顧客情報をセッションcustomerに保存
     	CustomerLogic cLogic = new CustomerLogic();
     	cLogic.setCustomerBeanFromRequestToSession(request);
