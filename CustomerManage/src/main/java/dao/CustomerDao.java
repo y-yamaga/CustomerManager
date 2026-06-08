@@ -173,7 +173,9 @@ public class CustomerDao extends BaseDao {
             pstmt.setString(7, customer.getEmail());
             pstmt.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
-            errMessage = e.getMessage();
+            //errMessage = e.getMessage();
+        	//以下メッセージ文を変更
+            errMessage = MESSAGE_CAN_NOT_ADD;
             LogUtil.printStackTrace(e);
         } finally {
             try {
@@ -216,10 +218,12 @@ public class CustomerDao extends BaseDao {
 
             int result = pstmt.executeUpdate();
             if (result != 1) {
-                errMessage = MESSAGE_NO_EXIST_DATA_TO_UPDATE;
+               errMessage = MESSAGE_NO_EXIST_DATA_TO_UPDATE;
             }
         } catch (ClassNotFoundException | SQLException e) {
-            errMessage = e.getMessage();
+            //errMessage = e.getMessage();
+        	//以下メッセージ文を変更
+        	errMessage = MESSAGE_CAN_NOT_UPDATE;
             LogUtil.printStackTrace(e);
         } finally {
             try {
