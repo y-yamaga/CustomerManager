@@ -56,6 +56,7 @@
         		<input tytpe="hidden" name="strTel" vlue="<%=customer.getTel()%>">
         		<input tytpe="hidden" name="strFax" vlue="<%=customer.getFax()%>">
         		<input tytpe="hidden" name="strEmail" vlue="<%=customer.getEmail()%>">
+        		<input type="hidden" name="token" value="${editToken}">
         	</p>
         	<p>
         		<button typy="button" name="state" value="update,<%=customer.getId()%>">OK</button>

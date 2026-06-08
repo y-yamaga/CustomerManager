@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -188,6 +189,20 @@ public class CustomerServlet extends BaseServlet {
     private void procUpdate(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws ServletException, IOException {
         // TODO 未実装
+    	
+    	// tokenの一致チェック
+    	String clientToken = request.getParameter("token");
+    	String editToken = (String)session.getAttribute("editToken");
+    	session.removeAttribute("editToken");
+    	
+    	if (clientToken == null || editToken == null || !clientToken.equals(editToken)) {
+    		//一致しない場合、未完了画面に遷移
+    		String errMsg = "この画面は無効です。最初からやり直してください。";
+    		session.setAttribute("errMessage", errMsg);
+    		request.getRequestDispatcher("WEB-INF/customer/update_fail.jsp").forward(request, response);
+    		return;
+    	}
+    	
     	// セッションから更新後の顧客情報を取得
     	CustomerBean customer = (CustomerBean)request.getSession().getAttribute("customer");
     	
@@ -217,6 +232,11 @@ public class CustomerServlet extends BaseServlet {
      */
     private void procNew(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO 未実装
+    	
+    	// token生成
+    	String token = UUID.randomUUID().toString();
+    	request.getSession().setAttribute("submitToken", token);
+    	
     	//新規登録画面(new.jsp)にフォワード
     	getServletContext().getRequestDispatcher("/WEB-INF/customer/new.jsp").forward(request, response);
     }
@@ -233,6 +253,20 @@ public class CustomerServlet extends BaseServlet {
     private void procAdd(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws ServletException, IOException {
         // TODO 未実装
+    	
+    	// tokenの一致チェック
+    	String clientToken = request.getParameter("token");
+    	String submitToken = (String)session.getAttribute("submitToken");
+    	session.removeAttribute("submitToken");
+    	
+    	if (clientToken == null || submitToken == null || !clientToken.equals(submitToken)) {
+    		//一致しない場合、未完了画面に遷移
+    		String errMsg = "この画面は無効です。最初からやり直してください。";
+    		session.setAttribute("errMessage", errMsg);
+    		request.getRequestDispatcher("WEB-INF/customer/add_fail.jsp").forward(request, response);
+    		return;
+    	}
+    	
     	// セッションスコープから新規顧客情報を受け取る
     	CustomerBean customer = (CustomerBean)session.getAttribute("customer");
     	
@@ -322,6 +356,11 @@ public class CustomerServlet extends BaseServlet {
     private void procEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         // TODO 未実装
+    	
+    	// token生成
+    	String token = UUID.randomUUID().toString();
+    	request.getSession().setAttribute("editToken", token);
+    	
     	// 既存データ編集(edit.jsp)にフォワード
         getServletContext().getRequestDispatcher("/WEB-INF/customer/edit.jsp").forward(request, response);
     }
@@ -337,9 +376,6 @@ public class CustomerServlet extends BaseServlet {
     private void procEditConfirm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // TODO 未実装
-    	// キャッシュ禁止
-    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	//HTTP 1.1
-    	response.setHeader("Pragma", "no-cache");	//HTTP 1.0
     	
     	//最新情報を入手(ブラウザバック対策)
     	HttpSession session = request.getSession();
@@ -367,9 +403,6 @@ public class CustomerServlet extends BaseServlet {
     private void procNewConfirm(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException, UnsupportedEncodingException {
         // TODO 未実装
-    	// キャッシュ禁止
-    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	//HTTP 1.1
-    	response.setHeader("Pragma", "no-cache");	//HTTP 1.0
     	
     	// リクエスト内の顧客情報をセッションcustomerに保存
     	CustomerLogic cLogic = new CustomerLogic();

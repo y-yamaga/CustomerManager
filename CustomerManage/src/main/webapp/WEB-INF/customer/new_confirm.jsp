@@ -45,6 +45,7 @@
 			</tr>
 		</table>
         <form action="CustomerServlet" method="post">
+        	<input type="hidden" name="token" value="${submitToken}">
         	<button name="state" value="add">OK</button>
         	<input type="button" value="戻る" onclick="history.back()">
         </form>
