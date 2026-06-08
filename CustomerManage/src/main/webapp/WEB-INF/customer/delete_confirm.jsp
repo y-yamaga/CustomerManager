@@ -46,6 +46,7 @@
         <form action="CustomerServlet" method="post">
         <!--  隠しパラメーターとしてリクエストする値  -->
         	<p style="display:none;">
+        		<!-- 現在使用していません
         		<input type="hidden" name="strName" value="<%=customer.getName()%>">
         		<input type="hidden" name="strZip" value="<%=customer.getZip()%>">
         		<input type="hidden" name="strAddress1" value="<%=customer.getAddress1()%>">
@@ -53,6 +54,8 @@
         		<input type="hidden" name="strTel" value="<%=customer.getTel()%>">
         		<input type="hidden" name="strFax" value="<%=customer.getFax()%>">
         		<input type="hidden" name="strEmail" value="<%=customer.getEmail()%>">
+        		-->
+        		<input type="hidden" name="token" value="${deleteToken}">
         	</p>
         	<p>
         		<button typy="button" name="state" value="delete">OK</button>

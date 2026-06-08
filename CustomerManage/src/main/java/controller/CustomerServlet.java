@@ -299,9 +299,10 @@ public class CustomerServlet extends BaseServlet {
     private void procDeleteConfirm(HttpServletRequest request, HttpServletResponse response, String id)
             throws ServletException, IOException {
         // TODO 未実装
-    	// キャッシュ禁止
-    	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	//HTTP 1.1
-    	response.setHeader("Pragma", "no-cache");	//HTTP 1.0
+
+    	// token生成
+    	String token = UUID.randomUUID().toString();
+    	request.getSession().setAttribute("deleteToken", token);
     	
     	// ID検索で顧客情報をDBから取得
     	CustomerLogic cLogic = new CustomerLogic();
@@ -326,6 +327,20 @@ public class CustomerServlet extends BaseServlet {
     private void procDelete(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws ServletException, IOException {
         // TODO 未実装
+    	
+    	// tokenの一致チェック
+    	String clientToken = request.getParameter("token");
+    	String submitToken = (String)session.getAttribute("deleteToken");
+    	session.removeAttribute("deleteToken");
+    	
+    	if (clientToken == null || submitToken == null || !clientToken.equals(submitToken)) {
+    		//一致しない場合、未完了画面に遷移
+    		String errMsg = "この画面は無効です。最初からやり直してください。";
+    		session.setAttribute("errMessage", errMsg);
+    		request.getRequestDispatcher("WEB-INF/customer/delete_fail.jsp").forward(request, response);
+    		return;
+    	}
+    	
     	// セッションから顧客情報取得
     	CustomerBean customer = (CustomerBean)request.getSession().getAttribute("customer");
     	

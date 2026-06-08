@@ -49,13 +49,15 @@
         <form action="CustomerServlet" method="post">
         <!--  隠しパラメーターとしてリクエストする値  -->
         	<p style="display:none;">
-        		<input tytpe="hidden" name="strName" vlue="<%=customer.getName()%>">
-        		<input tytpe="hidden" name="strZip" vlue="<%=customer.getZip()%>">
-        		<input tytpe="hidden" name="strAddress1" vlue="<%=customer.getAddress1()%>">
-        		<input tytpe="hidden" name="strAddress2" vlue="<%=customer.getAddress2()%>">
-        		<input tytpe="hidden" name="strTel" vlue="<%=customer.getTel()%>">
-        		<input tytpe="hidden" name="strFax" vlue="<%=customer.getFax()%>">
-        		<input tytpe="hidden" name="strEmail" vlue="<%=customer.getEmail()%>">
+        		<!-- 現在使用していません
+        		<input type="hidden" name="strName" value="<%=customer.getName()%>">
+        		<input type="hidden" name="strZip" value="<%=customer.getZip()%>">
+        		<input type="hidden" name="strAddress1" value="<%=customer.getAddress1()%>">
+        		<input type="hidden" name="strAddress2" value="<%=customer.getAddress2()%>">
+        		<input type="hidden" name="strTel" value="<%=customer.getTel()%>">
+        		<input type="hidden" name="strFax" value="<%=customer.getFax()%>">
+        		<input type="hidden" name="strEmail" value="<%=customer.getEmail()%>">
+        		-->
         		<input type="hidden" name="token" value="${editToken}">
         	</p>
         	<p>
