@@ -15,6 +15,7 @@ import customer.CustomerListBean;
 import customer.CustomerListLogic;
 import customer.CustomerLogic;
 import user.UserBean;
+import user.UserLogic;
 import util.LogUtil;
 import util.StringUtil;
 
@@ -49,7 +50,6 @@ public class CustomerServlet extends BaseServlet {
         HttpSession session = request.getSession();
         UserBean user = (UserBean) session.getAttribute("user");
 
-        /* ログイン状態のチェック テスト用にコメントアウト
         if ((user == null) || (user.getName() == null)) {
             procSessionError(request, response, session);
             return;
@@ -58,7 +58,6 @@ public class CustomerServlet extends BaseServlet {
         UserLogic userLogic = new UserLogic();
         user = userLogic.load(user.getId());
         session.setAttribute("user", user);
-        */
 
         String param = request.getParameter("state");
         String[] state = param.split(",");
@@ -341,6 +340,13 @@ public class CustomerServlet extends BaseServlet {
     	// キャッシュ禁止
     	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");	//HTTP 1.1
     	response.setHeader("Pragma", "no-cache");	//HTTP 1.0
+    	
+    	//最新情報を入手(ブラウザバック対策)
+    	HttpSession session = request.getSession();
+    	CustomerBean customer = (CustomerBean)session.getAttribute("customer");
+    	CustomerLogic customerLogic = new CustomerLogic();
+    	customer = customerLogic.load(customer.getId());
+    	session.setAttribute("customer", customer);
     	
     	// リクエスト内の顧客情報をセッションcustomerに保存
     	CustomerLogic cLogic = new CustomerLogic();
